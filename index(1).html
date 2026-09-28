@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Marketplace Demo — NOT REAL</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #fff;
+    color: #1f1f1f;
+    overflow-x: hidden;
+}
+
+/* =========================
+   DEMO WARNING
+========================= */
+
+.demo-warning {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+
+    background: #e53935;
+    color: white;
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* =========================
+   TOP NAVIGATION
+========================= */
+
+.topbar {
+    position: fixed;
+    top: 28px;
+    left: 0;
+    right: 0;
+
+    height: 58px;
+
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+
+    display: flex;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.logo {
+    width: 250px;
+    padding-left: 18px;
+
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    transform: skew(-8deg);
+    display: inline-block;
+}
+
+.top-links {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    gap: 65px;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.top-link {
+    cursor: default;
+}
+
+.top-search {
+    margin-left: auto;
+    margin-right: 12px;
+
+    width: 435px;
+    height: 34px;
+
+    background: #f1f2f4;
+    border: 1px solid #d2d5db;
+    border-radius: 7px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 12px;
+
+    color: #687078;
+}
+
+.top-search span {
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+.top-search input {
+    width: 100%;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    font-size: 14px;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+    padding-right: 15px;
+
+    font-size: 20px;
+}
+
+.nav-icon {
+    position: relative;
+}
+
+.notification {
+    position: absolute;
+
+    top: -9px;
+    right: -9px;
+
+    min-width: 18px;
+    height: 18px;
+
+    border-radius: 10px;
+
+    background: #e53935;
+    color: white;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    position: fixed;
+
+    top: 86px;
+    left: 0;
+    bottom: 0;
+
+    width: 250px;
+
+    background: #fff;
+    border-right: 1px solid #ddd;
+
+    padding: 14px 15px;
+
+    overflow-y: auto;
+
+    z-index: 900;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 5px 8px 18px;
+
+    font-weight: 700;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #ffb3d9,
+        #7765ff
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+}
+
+.side-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    height: 44px;
+
+    padding: 0 10px;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    margin-bottom: 2px;
+}
+
+.side-item:hover {
+    background: #f2f2f2;
+}
+
+.side-icon {
+    width: 22px;
+
+    text-align: center;
+
+    font-size: 18px;
+}
+
+.badge {
+    margin-left: auto;
+
+    min-width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    background: #24262a;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 11px;
+}
+
+.side-section {
+    margin-top: 18px;
+    margin-bottom: 8px;
+
+    padding-left: 10px;
+
+    font-size: 11px;
+    color: #777;
+
+    font-weight: 700;
+}
+
+.news {
+    padding: 8px 10px;
+
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.news div {
+    margin-bottom: 13px;
+}
+
+.news small {
+    color: #777;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main {
+    margin-left: 250px;
+
+    padding: 110px 30px 60px;
+
+    min-width: 800px;
+}
+
+.market-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.market-title {
+    font-size: 30px;
+    font-weight: 750;
+}
+
+.market-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.market-search {
+    width: 295px;
+    height: 35px;
+
+    border: 1px solid #d1d4d9;
+    background: #f5f6f7;
+
+    border-radius: 7px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 11px;
+}
+
+.market-search span {
+    margin-right: 7px;
+}
+
+.market-search input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+}
+
+.dropdown {
+    height: 35px;
+    min-width: 185px;
+
+    border: 1px solid #cfd2d7;
+    background: white;
+
+    border-radius: 7px;
+
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 13px;
+}
+
+.robux-button {
+    height: 35px;
+
+    padding: 0 14px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #3158e8;
+    color: white;
+
+    font-weight: 700;
+}
+
+/* =========================
+   USER LOOKUP
+========================= */
+
+.user-lookup {
+    margin-bottom: 25px;
+
+    background: #f5f6f7;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    padding: 18px;
+}
+
+.lookup-title {
+    font-size: 17px;
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+.lookup-subtitle {
+    color: #666;
+
+    font-size: 12px;
+
+    margin-bottom: 13px;
+}
+
+.lookup-row {
+    display: flex;
+    gap: 10px;
+}
+
+.lookup-input {
+    flex: 1;
+
+    height: 40px;
+
+    border: 1px solid #cfd2d7;
+
+    background: white;
+
+    border-radius: 7px;
+
+    padding: 0 12px;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+.lookup-input:focus {
+    border-color: #3158e8;
+}
+
+.lookup-button {
+    height: 40px;
+
+    padding: 0 20px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #3158e8;
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.lookup-button:hover {
+    background: #2448cc;
+}
+
+.lookup-button:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+/* =========================
+   USER RESULT
+========================= */
+
+.user-result {
+    display: none;
+
+    margin-top: 15px;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 9px;
+
+    padding: 14px;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.user-result.show {
+    display: flex;
+}
+
+.user-avatar {
+    width: 85px;
+    height: 85px;
+
+    border-radius: 8px;
+
+    object-fit: cover;
+
+    background: #eee;
+}
+
+.user-details {
+    flex: 1;
+}
+
+.user-display-name {
+    font-size: 19px;
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+.user-username {
+    font-size: 14px;
+    color: #666;
+
+    margin-bottom: 5px;
+}
+
+.user-id {
+    font-size: 11px;
+    color: #999;
+}
+
+.user-profile-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 35px;
+
+    padding: 0 14px;
+
+    border-radius: 6px;
+
+    background: #eee;
+
+    color: #222;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.lookup-status {
+    display: none;
+
+    margin-top: 12px;
+
+    font-size: 13px;
+
+    color: #555;
+}
+
+.lookup-status.show {
+    display: block;
+}
+
+.lookup-status.error {
+    color: #d32f2f;
+}
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters {
+    display: flex;
+
+    gap: 35px;
+
+    padding-bottom: 17px;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.arrow {
+    font-size: 14px;
+    color: #666;
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories {
+    display: flex;
+
+    gap: 10px;
+
+    overflow: hidden;
+
+    margin-bottom: 21px;
+}
+
+.category {
+    flex-shrink: 0;
+
+    background: #e9eaec;
+
+    padding: 9px 17px;
+
+    border-radius: 22px;
+
+    font-size: 13px;
+
+    color: #30343a;
+}
+
+/* =========================
+   ITEMS
+========================= */
+
+.item-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(175px, 1fr));
+
+    gap: 28px 14px;
+}
+
+.item {
+    min-width: 0;
+}
+
+.item-image {
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    background: #f5f5f6;
+
+    border-radius: 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 72px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.item-image::after {
+    content: "DEMO";
+
+    position: absolute;
+
+    bottom: 7px;
+    right: 7px;
+
+    background: rgba(0,0,0,.65);
+
+    color: white;
+
+    font-size: 9px;
+    font-weight: bold;
+
+    padding: 4px 6px;
+
+    border-radius: 4px;
+}
+
+.item-info {
+    padding-top: 10px;
+}
+
+.item-name {
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.creator {
+    font-size: 11px;
+
+    color: #555;
+
+    margin-top: 5px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+
+    margin-top: 6px;
+
+    font-size: 13px;
+
+    color: #555;
+}
+
+.price-icon {
+    font-size: 14px;
+}
+
+.gift-button {
+    width: 100%;
+
+    margin-top: 8px;
+
+    height: 32px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #3158e8;
+
+    color: white;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.gift-button:hover {
+    background: #2448cc;
+}
+
+/* =========================
+   GIFT MODAL
+========================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.55);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 5000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    width: 410px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 28px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+
+.modal-box h2 {
+    font-size: 22px;
+
+    margin-bottom: 9px;
+}
+
+.modal-description {
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+.selected-item {
+    background: #f4f4f5;
+
+    padding: 13px;
+
+    border-radius: 7px;
+
+    margin-bottom: 15px;
+
+    font-weight: 700;
+}
+
+.username-label {
+    display: block;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    margin-bottom: 7px;
+}
+
+.username {
+    width: 100%;
+
+    height: 40px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    padding: 0 11px;
+
+    outline: none;
+
+    margin-bottom: 15px;
+}
+
+.confirm {
+    width: 100%;
+
+    height: 40px;
+
+    background: #3158e8;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 6px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.cancel {
+    width: 100%;
+
+    height: 40px;
+
+    margin-top: 8px;
+
+    background: #eee;
+
+    color: #222;
+
+    border: none;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+/* =========================
+   CHAT
+========================= */
+
+.chat {
+    position: fixed;
+
+    right: 22px;
+    bottom: 0;
+
+    width: 265px;
+    height: 43px;
+
+    background: white;
+
+    border: 1px solid #ddd;
+    border-bottom: none;
+
+    border-radius: 12px 12px 0 0;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 14px;
+
+    box-shadow: 0 -2px 8px rgba(0,0,0,.08);
+
+    font-weight: 700;
+
+    z-index: 2000;
+}
+
+.chat-icon {
+    margin-left: auto;
+
+    font-size: 18px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 1000px) {
+
+    .top-links {
+        gap: 20px;
+    }
+
+    .top-search {
+        width: 220px;
+    }
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .logo {
+        width: 210px;
+    }
+
+    .main {
+        margin-left: 210px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     DEMO WARNING
+========================= -->
+
+<div class="demo-warning">
+    ⚠ DEMO / NOT REAL — THIS IS A FICTIONAL MARKETPLACE
+</div>
+
+<!-- =========================
+     TOP NAV
+========================= -->
+
+<header class="topbar">
+
+    <div class="logo">
+        <span>ROBLOX-STYLE</span>
+    </div>
+
+    <nav class="top-links">
+        <div class="top-link">Home</div>
+        <div class="top-link">Charts</div>
+        <div class="top-link">Marketplace</div>
+        <div class="top-link">Create</div>
+    </nav>
+
+    <div class="top-search">
+        <span>⌕</span>
+
+        <input
+            type="text"
+            placeholder="Search"
+            autocomplete="off"
+        >
+    </div>
+
+    <div class="nav-icons">
+
+        <div class="nav-icon">🔒</div>
+
+        <div class="nav-icon">
+            🔔
+            <div class="notification">14</div>
+        </div>
+
+        <div class="nav-icon">●</div>
+
+        <div class="nav-icon">⚙</div>
+
+    </div>
+
+</header>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar">
+
+    <div class="profile">
+
+        <div class="avatar">
+            😎
+        </div>
+
+        <span>glokk</span>
+
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">♙</div>
+        Profile
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">⬡</div>
+        Roblox Plus
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">▱</div>
+        Messages
+        <div class="badge">29</div>
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">♧</div>
+        Friends
+        <div class="badge">11</div>
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">♙</div>
+        Avatar
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">▣</div>
+        Inventory
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">⇄</div>
+        Trade
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">♧</div>
+        Communities
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">♢</div>
+        Themes
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">♧</div>
+        Newsroom
+    </div>
+
+    <div class="side-section">
+        NEWS
+    </div>
+
+    <div class="news">
+
+        <div>
+            Join The Hunt: Demo Event
+            <small>(demo)</small>
+        </div>
+
+        <div>
+            Parent Guide to Back-to-School
+            <small>(demo)</small>
+        </div>
+
+        <div>
+            2026 Marketplace Demo Awards
+            <small>(demo)</small>
+        </div>
+
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">▱</div>
+        Official Store
+    </div>
+
+    <div class="side-item">
+        <div class="side-icon">▣</div>
+        Buy Gift Cards
+    </div>
+
+</aside>
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+    <div class="market-header">
+
+        <h1 class="market-title">
+            Marketplace
+        </h1>
+
+        <div class="market-actions">
+
+            <div class="market-search">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    placeholder="Search"
+                    id="itemSearch"
+                    oninput="searchItems()"
+                >
+
+            </div>
+
+            <div class="dropdown">
+                All
+                <span>⌄</span>
+            </div>
+
+            <button class="robux-button">
+                Buy Robux
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ROBLOX USER LOOKUP
+    ========================= -->
+
+    <section class="user-lookup">
+
+        <div class="lookup-title">
+            Roblox User Lookup
+        </div>
+
+        <div class="lookup-subtitle">
+            Enter a Roblox username to display its public profile information.
+        </div>
+
+        <div class="lookup-row">
+
+            <input
+                id="robloxUsername"
+                class="lookup-input"
+                type="text"
+                maxlength="20"
+                placeholder="Enter username, e.g. builderman"
+                autocomplete="off"
+            >
+
+            <button
+                id="lookupButton"
+                class="lookup-button"
+                onclick="lookupRobloxUser()"
+            >
+                Search
+            </button>
+
+        </div>
+
+        <div
+            id="lookupStatus"
+            class="lookup-status"
+        ></div>
+
+
+        <div
+            id="userResult"
+            class="user-result"
+        >
+
+            <img
+                id="userAvatar"
+                class="user-avatar"
+                src=""
+                alt="Roblox avatar"
+            >
+
+            <div class="user-details">
+
+                <div
+                    id="userDisplayName"
+                    class="user-display-name"
+                >
+                    —
+                </div>
+
+                <div
+                    id="userUsername"
+                    class="user-username"
+                >
+                    @—
+                </div>
+
+                <div
+                    id="userId"
+                    class="user-id"
+                >
+                    User ID: —
+                </div>
+
+            </div>
+
+            <a
+                id="userProfileButton"
+                class="user-profile-button"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View Profile
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FILTERS
+    ========================= -->
+
+    <div class="filters">
+
+        <div class="filter">
+            All
+            <span class="arrow">⌄</span>
+        </div>
+
+        <div class="filter">
+            All Creators
+            <span class="arrow">⌄</span>
+        </div>
+
+        <div class="filter">
+            Any Price
+            <span class="arrow">⌄</span>
+        </div>
+
+        <div class="filter">
+            Sort by Relevance
+            <span class="arrow">⌄</span>
+        </div>
+
+        <div class="filter">
+            Sales Type
+            <span class="arrow">⌄</span>
+        </div>
+
+        <div class="filter">
+            Unavailable Items
+            <span class="arrow">⌄</span>
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================= -->
+
+    <div class="categories">
+
+        <div class="category">dreads</div>
+        <div class="category">steven</div>
+        <div class="category">emotes</div>
+        <div class="category">face</div>
+        <div class="category">monkey</div>
+        <div class="category">beard</div>
+        <div class="category">fedora</div>
+        <div class="category">scarf</div>
+        <div class="category">beanie</div>
+        <div class="category">sunglasses</div>
+        <div class="category">aura</div>
+        <div class="category">shades</div>
+        <div class="category">mouthless</div>
+        <div class="category">cheeks</div>
+        <div class="category">mustache</div>
+        <div class="category">ushanka</div>
+
+    </div>
+
+
+    <!-- =========================
+         ITEM GRID
+    ========================= -->
+
+    <div
+        class="item-grid"
+        id="itemGrid"
+    >
+
+        <div
+            class="item"
+            data-name="Classic Zombie"
+        >
+
+            <div class="item-image">
+                🧟
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Classic Zombie
+                </div>
+
+                <div class="creator">
+                    By @DemoCreator ✓
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    175
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Classic Zombie')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="item"
+            data-name="Headless Horseman"
+        >
+
+            <div class="item-image">
+                🎃
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Headless Horseman
+                </div>
+
+                <div class="creator">
+                    By Demo Bundles ✓
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    31000
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Headless Horseman')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="item"
+            data-name="Mini Plankton"
+        >
+
+            <div class="item-image">
+                👽
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Mini Plankton
+                </div>
+
+                <div class="creator">
+                    By Demo Bundles
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    175
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Mini Plankton')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="item"
+            data-name="Money Spread Hoodie"
+        >
+
+            <div class="item-image">
+                🥷
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Money Spread Hoodie
+                </div>
+
+                <div class="creator">
+                    By Demo Creator ✓
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    70
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Money Spread Hoodie')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="item"
+            data-name="Lazy Boy Head"
+        >
+
+            <div class="item-image">
+                👴
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Lazy Boy Head
+                </div>
+
+                <div class="creator">
+                    By Demo Creator
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    95
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Lazy Boy Head')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="item"
+            data-name="Korblox"
+        >
+
+            <div class="item-image">
+                🦵
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Korblox
+                </div>
+
+                <div class="creator">
+                    By Demo Creator ✓
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    17000
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Korblox')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="item"
+            data-name="Joao Chicken"
+        >
+
+            <div class="item-image">
+                🐔
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Joao Chicken
+                </div>
+
+                <div class="creator">
+                    By Demo Creations
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    175
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Joao Chicken')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="item"
+            data-name="Runner Shoes"
+        >
+
+            <div class="item-image">
+                👟
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Runner Shoes
+                </div>
+
+                <div class="creator">
+                    By Demo Creator ✓
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    60
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Runner Shoes')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="item"
+            data-name="Skeleton Evolution"
+        >
+
+            <div class="item-image">
+                💀
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Skeleton (Evolution)
+                </div>
+
+                <div class="creator">
+                    By Demo Creator ✓
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    175
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Skeleton Evolution')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="item"
+            data-name="Pigeon Whispering"
+        >
+
+            <div class="item-image">
+                🐦
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Pigeon Whispering
+                </div>
+
+                <div class="creator">
+                    By Demo Bundle ✓
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    65
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Pigeon Whispering')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="item"
+            data-name="Golden Manny"
+        >
+
+            <div class="item-image">
+                🟡
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Golden Manny
+                </div>
+
+                <div class="creator">
+                    By Demo Studios ✓
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    175
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Golden Manny')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="item"
+            data-name="Star Wand"
+        >
+
+            <div class="item-image">
+                🪄
+            </div>
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Star Wand
+                </div>
+
+                <div class="creator">
+                    By Demo UGC ✓
+                </div>
+
+                <div class="price">
+                    <span class="price-icon">◉</span>
+                    55
+                </div>
+
+                <button
+                    class="gift-button"
+                    onclick="openGift('Star Wand')"
+                >
+                    Gift
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     GIFT MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="giftModal"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            Gift Item
+        </h2>
+
+        <p class="modal-description">
+            This is a fictional demonstration of a marketplace gifting interface.
+        </p>
+
+        <div class="selected-item">
+
+            Item:
+
+            <span id="selectedItem">
+                Headless Horseman
+            </span>
+
+        </div>
+
+        <label class="username-label">
+            Demo recipient username
+        </label>
+
+        <input
+            class="username"
+            id="username"
+            type="text"
+            maxlength="30"
+            placeholder="Enter a fictional username"
+            autocomplete="off"
+        >
+
+        <button
+            class="confirm"
+            onclick="sendGift()"
+        >
+            Send Demo Gift
+        </button>
+
+        <button
+            class="cancel"
+            onclick="closeGift()"
+        >
+            Cancel
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CHAT
+========================= -->
+
+<div class="chat">
+
+    <span>
+        Chat
+    </span>
+
+    <span class="chat-icon">
+        ✎
+    </span>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   GIFT SYSTEM
+========================================================= */
+
+let selectedItem = "";
+
+function openGift(item) {
+
+    selectedItem = item;
+
+    document.getElementById(
+        "selectedItem"
+    ).textContent = item;
+
+    document.getElementById(
+        "giftModal"
+    ).classList.add("show");
+
+    document.getElementById(
+        "username"
+    ).value = "";
+
+    setTimeout(() => {
+
+        document.getElementById(
+            "username"
+        ).focus();
+
+    }, 100);
+}
+
+
+function closeGift() {
+
+    document.getElementById(
+        "giftModal"
+    ).classList.remove("show");
+}
+
+
+function sendGift() {
+
+    const username =
+        document.getElementById(
+            "username"
+        ).value.trim();
+
+    if (!username) {
+
+        alert(
+            "Enter a demo username first."
+        );
+
+        return;
+    }
+
+    closeGift();
+
+    setTimeout(() => {
+
+        alert(
+            "DEMO ONLY\n\n" +
+            "Simulated gift sent!\n\n" +
+            "Item: " +
+            selectedItem +
+            "\nRecipient: " +
+            username +
+            "\n\n" +
+            "No real Roblox transaction occurred."
+        );
+
+    }, 150);
+}
+
+
+/* =========================================================
+   MARKETPLACE SEARCH
+========================================================= */
+
+function searchItems() {
+
+    const query =
+        document.getElementById(
+            "itemSearch"
+        ).value.toLowerCase();
+
+    const items =
+        document.querySelectorAll(
+            ".item"
+        );
+
+    items.forEach(item => {
+
+        const name =
+            item.dataset.name.toLowerCase();
+
+        item.style.display =
+            name.includes(query)
+                ? ""
+                : "none";
+
+    });
+}
+
+
+/* =========================================================
+   ROBLOX USER LOOKUP
+========================================================= */
+
+/*
+    Roblox's public Users API accepts POST requests containing
+    usernames and returns matching user information.
+
+    We then use the public thumbnails API to get the avatar.
+
+    No Roblox authentication is used.
+*/
+
+async function lookupRobloxUser() {
+
+    const input =
+        document.getElementById(
+            "robloxUsername"
+        );
+
+    const button =
+        document.getElementById(
+            "lookupButton"
+        );
+
+    const status =
+        document.getElementById(
+            "lookupStatus"
+        );
+
+    const result =
+        document.getElementById(
+            "userResult"
+        );
+
+    const username =
+        input.value.trim();
+
+
+    /* Clear previous result */
+
+    result.classList.remove("show");
+
+    status.className =
+        "lookup-status";
+
+
+    /* Validate input */
+
+    if (!username) {
+
+        status.textContent =
+            "Enter a Roblox username.";
+
+        status.classList.add("show");
+        status.classList.add("error");
+
+        return;
+    }
+
+
+    /* Roblox usernames have a maximum length of 20 */
+
+    if (username.length > 20) {
+
+        status.textContent =
+            "That username is too long.";
+
+        status.classList.add("show");
+        status.classList.add("error");
+
+        return;
+    }
+
+
+    /* Loading state */
+
+    button.disabled = true;
+    button.textContent = "Searching...";
+
+    status.textContent =
+        "Contacting Roblox...";
+
+    status.classList.add("show");
+
+
+    try {
+
+        /*
+            STEP 1:
+            Convert username -> Roblox user ID
+        */
+
+        const userResponse =
+            await fetch(
+                "https://users.roblox.com/v1/usernames/users",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        usernames: [username],
+                        excludeBannedUsers: false
+                    })
+                }
+            );
+
+
+        if (!userResponse.ok) {
+
+            throw new Error(
+                "Roblox user lookup returned HTTP " +
+                userResponse.status
+            );
+
+        }
+
+
+        const userData =
+            await userResponse.json();
+
+
+        /*
+            No matching user
+        */
+
+        if (
+            !userData.data ||
+            userData.data.length === 0
+        ) {
+
+            result.classList.remove("show");
+
+            status.textContent =
+                "No Roblox user was found with that username.";
+
+            status.classList.add("show");
+            status.classList.add("error");
+
+            return;
+        }
+
+
+        const user =
+            userData.data[0];
+
+
+        /*
+            STEP 2:
+            Get avatar thumbnail
+        */
+
+        const thumbnailURL =
+            "https://thumbnails.roblox.com/v1/users/avatar-headshot" +
+            "?userIds=" +
+            encodeURIComponent(user.id) +
+            "&size=150x150" +
+            "&format=Png" +
+            "&isCircular=false";
+
+
+        const thumbnailResponse =
+            await fetch(
+                thumbnailURL
+            );
+
+
+        if (!thumbnailResponse.ok) {
+
+            throw new Error(
+                "Avatar request returned HTTP " +
+                thumbnailResponse.status
+            );
+
+        }
+
+
+        const thumbnailData =
+            await thumbnailResponse.json();
+
+
+        if (
+            !thumbnailData.data ||
+            thumbnailData.data.length === 0
+        ) {
+
+            throw new Error(
+                "Roblox did not return an avatar."
+            );
+
+        }
+
+
+        const avatarURL =
+            thumbnailData.data[0].imageUrl;
+
+
+        /*
+            STEP 3:
+            Display everything
+        */
+
+        document.getElementById(
+            "userAvatar"
+        ).src = avatarURL;
+
+
+        document.getElementById(
+            "userDisplayName"
+        ).textContent =
+            user.displayName || user.name;
+
+
+        document.getElementById(
+            "userUsername"
+        ).textContent =
+            "@" + user.name;
+
+
+        document.getElementById(
+            "userId"
+        ).textContent =
+            "User ID: " + user.id;
+
+
+        document.getElementById(
+            "userProfileButton"
+        ).href =
+            "https://www.roblox.com/users/" +
+            user.id +
+            "/profile";
+
+
+        /*
+            Show result
+        */
+
+        result.classList.add("show");
+
+        status.textContent =
+            "User found.";
+
+        status.classList.add("show");
+
+
+    } catch (error) {
+
+        console.error(
+            "Roblox lookup error:",
+            error
+        );
+
+
+        result.classList.remove("show");
+
+
+        /*
+            Give a useful error instead of
+            the generic "Unable to contact Roblox."
+        */
+
+        status.textContent =
+            "The Roblox request could not be completed. " +
+            "If you opened this HTML directly as a file, " +
+            "run it through a local web server such as VS Code Live Server.";
+
+        status.classList.add("show");
+        status.classList.add("error");
+
+
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "Search";
+
+    }
+
+}
+
+
+/* =========================================================
+   ENTER KEY FOR USER SEARCH
+========================================================= */
+
+document
+    .getElementById("robloxUsername")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                lookupRobloxUser();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   CLOSE GIFT MODAL BY CLICKING OUTSIDE
+========================================================= */
+
+document
+    .getElementById("giftModal")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === this
+            ) {
+
+                closeGift();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
